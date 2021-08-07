@@ -1,0 +1,42 @@
+server:
+  port: 3000
+
+spring:
+  application:
+    name: proxy-service
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  cloud:
+    gateway:
+      routes:
+        - id: notificationModule
+          uri: lb://notification-service
+          predicates:
+            - Path=/notification/**
+        - id: authModule
+          uri: lb://authentication-service
+          predicates:
+            - Path=/auth/**
+        - id: formsModule
+          uri: lb://forms-service
+          predicates:
+            - Path=/forms/**
+        - id: storageModule
+          uri: lb://storage-service
+          predicates:
+            - Path=/storage/**
+        - id: termsModule
+          uri: lb://terms-service
+          predicates:
+            - Path=/terms/**
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://eurekaUser:eurekaPass@localhost:3007/eureka/
