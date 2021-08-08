@@ -10,27 +10,17 @@ spring:
       max-request-size: 10MB
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods: "*"
       routes:
-        - id: notificationModule
-          uri: lb://notification-service
-          predicates:
-            - Path=/notification/**
-        - id: authModule
-          uri: lb://authentication-service
+        - id: auth-service
+          uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
-        - id: formsModule
-          uri: lb://forms-service
-          predicates:
-            - Path=/forms/**
-        - id: storageModule
-          uri: lb://storage-service
-          predicates:
-            - Path=/storage/**
-        - id: termsModule
-          uri: lb://terms-service
-          predicates:
-            - Path=/terms/**
 
 eureka:
   instance:
