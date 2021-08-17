@@ -37,4 +37,4 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     serviceUrl:
-      defaultZone: http://eurekaUser:eurekaPass@localhost:3007/eureka/
+      defaultZone: http://eurekaUser:eurekaPass@discovery-service:3007/eureka/
